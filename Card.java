@@ -17,4 +17,9 @@ public class Card {
         return check;
     }
 
+    @Override
+    public String toString() {
+        return "Card{name='" + name + "', age=" + age + ", id=" + id + ", positive='" + positive + "'}";
+    }
+
 }
