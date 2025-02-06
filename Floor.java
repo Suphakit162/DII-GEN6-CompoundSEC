@@ -1,9 +1,24 @@
-public class Floor {
-    private int level ;
-    private int room ;
+interface Floor {
 
-    public Floor(int level,int room){
-        this.level = level ;
-        this.room = room ;
+    String floor = "";
+    String level = "";
+
+    public void useLift();
+    public void levelFloor();
+}
+class lift implements Floor {
+    @Override
+    public void useLift() {
+
+    }
+
+    @Override
+    public void levelFloor() {
+
     }
 }
+
+
+
+
+

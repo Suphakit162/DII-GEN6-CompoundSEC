@@ -3,7 +3,7 @@ public abstract class Card {
     protected String name;
     protected int age;
     protected int id;
-    protected String positive;
+    protected String position;
     protected boolean check;
 
 
@@ -11,7 +11,7 @@ public abstract class Card {
         this.name = name;
         this.age = age;
         this.id = id;
-        this.positive = positive;
+        this.position = positive;
         this.check = false;
     }
 
@@ -19,8 +19,9 @@ public abstract class Card {
     public abstract void validateCard();
 
 
+
     public String getDetails() {
-        return "Name: " + name + ", Age: " + age + ", ID: " + id + ", Positive: " + positive;
+        return "Name: " + name + ", Age: " + age + ", ID: " + id + ", Positive: " + position;
     }
 }
 
@@ -39,6 +40,8 @@ class EmployeeCard extends Card {
             System.out.println("Employee Card " + name + " is invalid.");
         }
     }
+
+
 }
 
 // บัตรผู้เยี่ยมชม
@@ -58,3 +61,5 @@ class VisitorCard extends Card {
     }
 }
 
+
+//Id มีหลายชั้นเเละต้องเข้าถึงได้ตอนใช้ที่ไหนๆ ถ้าคนที่เก็บบัตรนี้ได้สามารถใช้การ์ดนี้ได้ทุกๆที่ สื่อคือ การ์ดใบนี้ควรมีพาสเวิร์ด ตามแบบ multi-facades
