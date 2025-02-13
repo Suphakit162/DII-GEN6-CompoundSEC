@@ -16,8 +16,7 @@ public abstract class Card {
 
 
     public abstract void validateCard();
-    // ฟังก์ชัน analyzeUsage เพื่อวิเคราะห์พฤติกรรมการใช้บัตร
-    public abstract void analyzeUsage();
+    public abstract void analyzeUsage();//วิเคราะห์พฤติกรรมการใช้บัตร
 
 
 
