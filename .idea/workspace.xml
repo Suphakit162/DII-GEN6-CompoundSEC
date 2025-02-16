@@ -5,9 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0a94ba3-893a-4056-b111-b1f3cf91fed2" name="Changes" comment="">
+<<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/EmployeeCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/FloorAccessControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/VisitorCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/models/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Floor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project Diagrame.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/Project Diagrame.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+=======
       <change afterPath="$PROJECT_DIR$/DetailCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/Card.java" afterDir="false" />
+>>>>>>> 146cfb6b868ca6805ca2fe26c61af289f3ca60ba
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +56,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",

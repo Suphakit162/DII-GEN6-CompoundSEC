@@ -17,6 +17,6 @@ The importances of the project is allow student to do
 - Floor level access control and room level access control
 2. Audit trial for card access
 - Each attempts will be logged with necessary info
-- Card generation or modification will be logged with necessary info
-3. Card management 
+- models.Card generation or modification will be logged with necessary info
+3. models.Card management 
 - Add, modify, revoke permission of each card

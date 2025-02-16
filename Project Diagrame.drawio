@@ -19,7 +19,7 @@
         <mxCell id="J54j-rkk1pIBrl5uMUaP-5" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;rotation=90;" vertex="1" parent="1">
           <mxGeometry x="390" y="-36" width="50" height="384" as="geometry" />
         </mxCell>
-        <mxCell id="J54j-rkk1pIBrl5uMUaP-6" value="Card" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="J54j-rkk1pIBrl5uMUaP-6" value="models.Card" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="183" y="180" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="J54j-rkk1pIBrl5uMUaP-7" value="Floor" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
