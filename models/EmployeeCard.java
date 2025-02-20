@@ -8,7 +8,7 @@ public class EmployeeCard extends Card {
 
     @Override
     public void analyzeUsage() {
-        System.out.println("🔍 Employee Card Usage Analysis: " + getCardId());
+        System.out.println(" Employee Card Usage Analysis: " + getCardId());
     }
 }
 

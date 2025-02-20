@@ -1,24 +1,23 @@
+// models/FloorAccessControl.java
 package models;
 
 import services.Logger;
 
 public class FloorAccessControl {
-    private final String floorLevel;
+    private final AccessStrategy accessStrategy;  // ใช้ AccessStrategy แทนที่การควบคุมการเข้าถึงแบบเดิม
     private final Card card;
 
-    public FloorAccessControl(String floorLevel, Card card) {
-        this.floorLevel = floorLevel;
+    // Constructor เพิ่มการกำหนดกลยุทธ์
+    public FloorAccessControl(AccessStrategy accessStrategy, Card card) {
+        this.accessStrategy = accessStrategy;
         this.card = card;
     }
 
     public void useLift() {
-        if (card.isActive()) {
-            Logger.log("Lift Access Granted - Floor: " + floorLevel + " | Card ID: " + card.getCardId());
-        } else {
-            Logger.log("Lift Access Denied - Floor: " + floorLevel + " | Card ID: " + card.getCardId());
-        }
+        accessStrategy.grantAccess(card);  // ใช้กลยุทธ์ที่กำหนดไว้
     }
 }
+
 
 
 

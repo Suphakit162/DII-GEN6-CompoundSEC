@@ -14,11 +14,9 @@ public class Main {
         admin.addCard(visitorCard);
 
         // ทดสอบการใช้บัตร
-        FloorAccessControl floor1 = new FloorAccessControl("1st", employeeCard);
-        floor1.useLift();
 
-        FloorAccessControl floor2 = new FloorAccessControl("2nd", visitorCard);
-        floor2.useLift();
+
+
 
         // ยกเลิกบัตร
         admin.revokeCard(visitorCard);

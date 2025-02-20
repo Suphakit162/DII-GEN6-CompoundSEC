@@ -8,6 +8,6 @@ public class VisitorCard extends Card {
 
     @Override
     public void analyzeUsage() {
-        System.out.println("🔍 Visitor Card Usage Analysis: " + getCardId());
+        System.out.println(" Visitor Card Usage Analysis: " + getCardId());
     }
 }
