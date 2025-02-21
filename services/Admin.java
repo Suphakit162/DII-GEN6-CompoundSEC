@@ -1,8 +1,6 @@
 package services;
 
 import models.Card;
-import models.EmployeeCard; // Import ที่ถูกต้อง
-import models.VisitorCard; // Import ที่ถูกต้อง
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,35 +13,25 @@ public class Admin {
         this.cards = new ArrayList<>();
     }
 
-    public void addCard(Card card) {
+    public void addCard(Card card, List<String> accessLevels) {
+        card.setAccessLevels(accessLevels);
         cards.add(card);
-        Logger.log("Card Added - ID: " + card.getCardId() + " | Owner: " + card.getOwnerName());
+        Logger.log("Card Added - ID: " + card.getCardIdFacades().get(0) + " | Owner: " + card.getOwnerName());
     }
 
     public void revokeCard(Card card) {
-        if (card.isActive()) { // ตรวจสอบสถานะบัตรก่อน revoke
+        if (card.isActive()) {
             card.deactivateCard();
-            Logger.log("Card Revoked - ID: " + card.getCardId());
+            Logger.log("Card Revoked - ID: " + card.getCardIdFacades().get(0));
         } else {
-            Logger.log("Card is already inactive - ID: " + card.getCardId()); // Log กรณีบัตร inactive อยู่แล้ว
+            Logger.log("Card is already inactive - ID: " + card.getCardIdFacades().get(0));
         }
     }
 
-    public void modifyCard(Card card, String newOwner) {
-        if (card instanceof EmployeeCard) {
-            EmployeeCard employeeCard = (EmployeeCard) card;
-            // แก้ไขข้อมูลบัตรพนักงาน (ตัวอย่าง)
-            // employeeCard.setOwnerName(newOwner); // สมมติว่ามี setter
-            Logger.log("Employee Card Modified - ID: " + card.getCardId() + " | New Owner: " + newOwner);
-
-        } else if (card instanceof VisitorCard) {
-            VisitorCard visitorCard = (VisitorCard) card;
-            // แก้ไขข้อมูลบัตรผู้เยี่ยมชม (ตัวอย่าง)
-            // visitorCard.setOwnerName(newOwner); // สมมติว่ามี setter
-            Logger.log("Visitor Card Modified - ID: " + card.getCardId() + " | New Owner: " + newOwner);
-        } else {
-            Logger.log("Unknown Card Type Modified - ID: " + card.getCardId() + " | New Owner: " + newOwner);
-        }
+    public void modifyCard(Card card, String newOwner, List<String> newAccessLevels) {
+        card.setOwnerName(newOwner);
+        card.setAccessLevels(newAccessLevels);
+        Logger.log("Card Modified - ID: " + card.getCardIdFacades().get(0) + " | New Owner: " + newOwner);
     }
 
     public Card findCard(int cardId) {
@@ -52,7 +40,7 @@ public class Admin {
                 return card;
             }
         }
-        return null; // Return null if card not found
+        return null;
     }
 }
 

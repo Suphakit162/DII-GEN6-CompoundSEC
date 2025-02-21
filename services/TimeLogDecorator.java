@@ -1,12 +1,15 @@
-// services/TimeLogDecorator.java
 package services;
 
 import java.time.LocalDateTime;
 
-public class TimeLogDecorator extends Logger {
+public class TimeLogDecorator {
+    private Logger logger;
 
-    @Override
+    public TimeLogDecorator(Logger logger) {
+        this.logger = logger;
+    }
+
     public void log(String message) {
-        super.log("[Time: " + LocalDateTime.now() + "] " + message);  // เพิ่มเวลาใน Log
+        logger.log("[Time: " + LocalDateTime.now() + "] " + message);
     }
 }
