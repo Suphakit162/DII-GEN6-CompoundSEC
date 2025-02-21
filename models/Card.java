@@ -2,6 +2,7 @@ package models; // เพิ่ม package models
 
 import services.Logger; // เพิ่ม import services.Logger
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public abstract class Card {
     private List<String> accessLevels;
     private String encryptedData;
     private String password;
+
 
     public Card(String ownerName, int ownerAge, List<String> cardIdFacades, String cardType, String password) {
         this.ownerName = ownerName;
@@ -99,7 +101,17 @@ public abstract class Card {
         }
         return -1; // หรือค่า default ที่เหมาะสม
     }
+
+    private LocalTime allowedStart;
+    private LocalTime allowedEnd;
+
+    public boolean isWithinAccessTime() {
+        LocalTime now = LocalTime.now();
+        return now.isAfter(allowedStart) && now.isBefore(allowedEnd);
+    }
 }
+
+
 
 
 

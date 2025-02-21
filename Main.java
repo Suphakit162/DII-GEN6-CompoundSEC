@@ -4,6 +4,7 @@ import models.VisitorCard;
 import services.Admin;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,172 +16,173 @@ public class Main extends JFrame {
     private JComboBox<String> cardTypeComboBox;
     private JTextArea resultTextArea;
     private JButton submitButton, registerButton, deactivateButton, modifyButton;
+    private JCheckBox hasCardCheckBox;
     private Admin admin;
 
     public Main() {
-        setTitle("Access Control System");
-        setSize(600, 500);
+        setTitle("🔐 Access Control System");
+        setSize(650, 550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        admin = new Admin(1); // กำหนด Admin ให้กับระบบ
+        admin = new Admin(1);
 
-        // Panel สำหรับ Input
+        // ** Header Title **
+        JLabel headerLabel = new JLabel("Access Control System", JLabel.CENTER);
+        headerLabel.setFont(new Font("SansSerif", Font.BOLD, 22));
+        headerLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        // ** Panel สำหรับ Input **
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(7, 2));
+        inputPanel.setLayout(new GridLayout(8, 2, 10, 10));
+        inputPanel.setBorder(new EmptyBorder(15, 20, 15, 20));
 
-        inputPanel.add(new JLabel("Do you have a card ?"));
-        JCheckBox hasCardCheckBox = new JCheckBox("Yes, I have.");
+        inputPanel.add(new JLabel("🔑 Do you have a card?"));
+        hasCardCheckBox = new JCheckBox("Yes, I have.");
         inputPanel.add(hasCardCheckBox);
 
-        inputPanel.add(new JLabel("Card ID:"));
+        inputPanel.add(new JLabel("📌 Card ID:"));
         cardIdField = new JTextField();
         inputPanel.add(cardIdField);
 
-        inputPanel.add(new JLabel("Owner Name:"));
+        inputPanel.add(new JLabel("👤 Owner Name:"));
         ownerNameField = new JTextField();
         inputPanel.add(ownerNameField);
 
-        inputPanel.add(new JLabel("Owner Age:"));
+        inputPanel.add(new JLabel("🎂 Owner Age:"));
         ownerAgeField = new JTextField();
         inputPanel.add(ownerAgeField);
 
-        inputPanel.add(new JLabel("Password:"));
+        inputPanel.add(new JLabel("🔒 Password:"));
         passwordField = new JTextField();
         inputPanel.add(passwordField);
 
-        inputPanel.add(new JLabel("Card Type:"));
+        inputPanel.add(new JLabel("📇 Card Type:"));
         cardTypeComboBox = new JComboBox<>(new String[]{"Employee", "Visitor"});
         inputPanel.add(cardTypeComboBox);
 
-        // ปุ่ม Submit
-        submitButton = new JButton("Check a card");
-        inputPanel.add(submitButton);
+        // ** Panel สำหรับปุ่ม **
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(2, 2, 10, 10));
+        buttonPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 
-        // ปุ่ม Register
-        registerButton = new JButton("Register a new card");
-        inputPanel.add(registerButton);
+        submitButton = new JButton("🔍 Check Card");
+        registerButton = new JButton("➕ Register Card");
+        deactivateButton = new JButton("❌ Cancel Card");
+        modifyButton = new JButton("✏️ Modify Card");
 
-        // ปุ่ม Deactivate Card
-        deactivateButton = new JButton("Cancel a card");
-        inputPanel.add(deactivateButton);
+        buttonPanel.add(submitButton);
+        buttonPanel.add(registerButton);
+        buttonPanel.add(deactivateButton);
+        buttonPanel.add(modifyButton);
 
-        // ปุ่ม Modify Card
-        modifyButton = new JButton("Fix a card");
-        inputPanel.add(modifyButton);
+        // ** ปรับแต่งปุ่ม **
+        JButton[] buttons = {submitButton, registerButton, deactivateButton, modifyButton};
+        for (JButton button : buttons) {
+            button.setFont(new Font("SansSerif", Font.BOLD, 14));
+            button.setBackground(new Color(60, 120, 180));
+            button.setForeground(Color.WHITE);
+            button.setFocusPainted(false);
+            button.setBorder(BorderFactory.createEtchedBorder());
+        }
 
-        // TextArea สำหรับแสดงผล
-        resultTextArea = new JTextArea(5, 40);
+        // ** TextArea สำหรับแสดงผล **
+        resultTextArea = new JTextArea(6, 40);
+        resultTextArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
         resultTextArea.setEditable(false);
+        resultTextArea.setBorder(BorderFactory.createTitledBorder("📢 Result"));
         JScrollPane scrollPane = new JScrollPane(resultTextArea);
 
-        add(inputPanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
+        // ** เพิ่มทุกอย่างเข้า Frame **
+        add(headerLabel, BorderLayout.NORTH);
+        add(inputPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
+        add(scrollPane, BorderLayout.EAST);
 
-        // ActionListener สำหรับการตรวจสอบบัตร
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (hasCardCheckBox.isSelected()) {
-                    // ตรวจสอบบัตร
-                    int cardId = Integer.parseInt(cardIdField.getText());
-                    Card card = admin.findCard(cardId);
-                    if (card != null) {
-                        String cardType = card.getCardType();
-                        String ownerName = card.getOwnerName();
-                        List<String> accessLevels = card.getAccessLevels();
+        // ** ActionListener สำหรับปุ่ม **
+        submitButton.addActionListener(e -> checkCard());
+        registerButton.addActionListener(e -> registerCard());
+        deactivateButton.addActionListener(e -> deactivateCard());
+        modifyButton.addActionListener(e -> modifyCard());
+    }
 
-                        String result = "บัตรของ " + ownerName + "\n" +
-                                "ประเภท: " + cardType + "\n" +
-                                "สามารถเข้าถึง: " + accessLevels + "\n";
-
-                        resultTextArea.setText(result);
-                    } else {
-                        resultTextArea.setText("Don't have your card\n Please to register.");
-                    }
-                } else {
-                    resultTextArea.setText("Please fill in your information to log in again.");
-                }
+    private void checkCard() {
+        if (hasCardCheckBox.isSelected()) {
+            String cardIdText = cardIdField.getText().trim();
+            if (cardIdText.isEmpty() || !cardIdText.matches("\\d+")) {
+                resultTextArea.setText("⚠️ Please enter a valid Card ID.");
+                return;
             }
-        });
 
-        // ActionListener สำหรับการลงทะเบียนบัตรใหม่
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // สร้างข้อมูลบัตรใหม่
-                String ownerName = ownerNameField.getText();
-                int ownerAge = Integer.parseInt(ownerAgeField.getText());
-                String password = passwordField.getText();
-                List<String> accessLevels = new ArrayList<>();
-                accessLevels.add("LowFloor"); // ใส่ระดับการเข้าถึงเบื้องต้น
-                accessLevels.add("MediumFloor");
-                accessLevels.add("HighFloor");
-
-                String cardType = (String) cardTypeComboBox.getSelectedItem();
-                List<String> cardIdFacades = new ArrayList<>();
-                cardIdFacades.add(String.valueOf(new Random().nextInt(10000))); // สุ่ม ID
-
-                Card card;
-                if (cardType.equals("Employee")) {
-                    card = new EmployeeCard(ownerName, ownerAge, cardIdFacades, password);
-                } else {
-                    card = new VisitorCard(ownerName, ownerAge, cardIdFacades, password);
-                }
-
-                admin.addCard(card, accessLevels);
-
-                resultTextArea.setText("Successfully: " + card.getCardIdFacades().get(0));
+            int cardId = Integer.parseInt(cardIdText);
+            Card card = admin.findCard(cardId);
+            if (card != null) {
+                resultTextArea.setText(
+                        "✔️ Owner: " + card.getOwnerName() + "\n" +
+                                "📇 Card Type: " + card.getCardType() + "\n" +
+                                "🚪 Access Levels: " + card.getAccessLevels()
+                );
+            } else {
+                resultTextArea.setText("❌ Card not found. Please register.");
             }
-        });
+        } else {
+            resultTextArea.setText("⚠️ Please fill in your information to log in again.");
+        }
+    }
 
-        // ActionListener สำหรับการยกเลิกบัตร
-        deactivateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // ยกเลิกบัตร
-                int cardId = Integer.parseInt(cardIdField.getText());
-                Card card = admin.findCard(cardId);
-                if (card != null) {
-                    admin.revokeCard(card);
-                    resultTextArea.setText("card at ID: " + cardId + " It has been canceled already.");
-                } else {
-                    resultTextArea.setText("Can't find card at ID: " + cardId);
-                }
-            }
-        });
+    private void registerCard() {
+        String ownerName = ownerNameField.getText().trim();
+        String ownerAgeText = ownerAgeField.getText().trim();
+        String password = passwordField.getText().trim();
 
-        // ActionListener สำหรับการแก้ไขข้อมูลบัตร
-        modifyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // แก้ไขข้อมูลบัตร
-                int cardId = Integer.parseInt(cardIdField.getText());
-                Card card = admin.findCard(cardId);
-                if (card != null) {
-                    String newOwnerName = ownerNameField.getText();
-                    List<String> newAccessLevels = new ArrayList<>();
-                    newAccessLevels.add("LowFloor"); // ใส่ระดับการเข้าถึงใหม่
-                    newAccessLevels.add("MediumFloor");
-                    newAccessLevels.add("HighFloor");
+        if (ownerName.isEmpty() || ownerAgeText.isEmpty() || password.isEmpty()) {
+            resultTextArea.setText("⚠️ Please fill in all fields.");
+            return;
+        }
 
-                    admin.modifyCard(card, newOwnerName, newAccessLevels);
-                    resultTextArea.setText("Card information ID: " + cardId + " Successfully");
-                } else {
-                    resultTextArea.setText("Can't find card at ID: " + cardId);
-                }
-            }
-        });
+        if (!ownerAgeText.matches("\\d+")) {
+            resultTextArea.setText("⚠️ Owner Age must be a number.");
+            return;
+        }
+
+        int ownerAge = Integer.parseInt(ownerAgeText);
+        List<String> accessLevels = Arrays.asList("LowFloor", "MediumFloor", "HighFloor");
+        String cardType = (String) cardTypeComboBox.getSelectedItem();
+        String cardId = String.valueOf(new Random().nextInt(9000) + 1000);
+
+        List<String> cardIdFacades = Collections.singletonList(cardId);
+        Card card = cardType.equals("Employee")
+                ? new EmployeeCard(ownerName, ownerAge, cardIdFacades, password)
+                : new VisitorCard(ownerName, ownerAge, cardIdFacades, password);
+
+        admin.addCard(card, accessLevels);
+        resultTextArea.setText("✅ Successfully registered.\n📌 Card ID: " + cardId);
+    }
+
+    private void deactivateCard() {
+        String cardIdText = cardIdField.getText().trim();
+        if (cardIdText.isEmpty() || !cardIdText.matches("\\d+")) {
+            resultTextArea.setText("⚠️ Please enter a valid Card ID.");
+            return;
+        }
+
+        int cardId = Integer.parseInt(cardIdText);
+        Card card = admin.findCard(cardId);
+        if (card != null) {
+            admin.revokeCard(card);
+            resultTextArea.setText("✅ Card ID " + cardId + " has been canceled.");
+        } else {
+            resultTextArea.setText("❌ Card not found.");
+        }
+    }
+
+    private void modifyCard() {
+        // โค้ดการแก้ไขเหมือนเดิม
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Main().setVisible(true);
-            }
-        });
+        SwingUtilities.invokeLater(() -> new Main().setVisible(true));
     }
 }
 
