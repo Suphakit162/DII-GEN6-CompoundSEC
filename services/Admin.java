@@ -21,7 +21,8 @@ public class Admin {
 
     public void revokeCard(Card card) {
         if (card.isActive()) {
-            card.deactivateCard();
+            card.deactivateCard(); // หรือปิดการใช้งานบัตร
+            cards.remove(card);     // ลบบัตรออกจากรายการ cards
             Logger.log("Card Revoked - ID: " + card.getCardIdFacades().get(0));
         } else {
             Logger.log("Card is already inactive - ID: " + card.getCardIdFacades().get(0));
@@ -43,4 +44,5 @@ public class Admin {
         return null;
     }
 }
+
 

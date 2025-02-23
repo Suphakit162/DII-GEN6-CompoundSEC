@@ -6,8 +6,8 @@ import services.Admin;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-
 import java.util.*;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Main extends JFrame {
@@ -27,14 +27,14 @@ public class Main extends JFrame {
 
         admin = new Admin(1);
 
-        // ** Header Title **
+        // เพิ่มข้อมูลเริ่มต้น
+        admin.addCard(new EmployeeCard("Suphakit", 19, Arrays.asList("0001"), "1111"), Arrays.asList("LowFloor", "MediumFloor", "HighFloor"));
+
         JLabel headerLabel = new JLabel("Access Control System", JLabel.CENTER);
         headerLabel.setFont(new Font("SansSerif", Font.BOLD, 22));
         headerLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // ** Panel สำหรับ Input **
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(8, 2, 10, 10));
+        JPanel inputPanel = new JPanel(new GridLayout(8, 2, 10, 10));
         inputPanel.setBorder(new EmptyBorder(15, 20, 15, 20));
 
         inputPanel.add(new JLabel("🔑 Do you have a card?"));
@@ -61,9 +61,7 @@ public class Main extends JFrame {
         cardTypeComboBox = new JComboBox<>(new String[]{"Employee", "Visitor"});
         inputPanel.add(cardTypeComboBox);
 
-        // ** Panel สำหรับปุ่ม **
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 2, 10, 10));
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 
         submitButton = new JButton("🔍 Check Card");
@@ -76,57 +74,83 @@ public class Main extends JFrame {
         buttonPanel.add(deactivateButton);
         buttonPanel.add(modifyButton);
 
-        // ** ปรับแต่งปุ่ม **
-        JButton[] buttons = {submitButton, registerButton, deactivateButton, modifyButton};
-        for (JButton button : buttons) {
-            button.setFont(new Font("SansSerif", Font.BOLD, 14));
-            button.setBackground(new Color(60, 120, 180));
-            button.setForeground(Color.WHITE);
-            button.setFocusPainted(false);
-            button.setBorder(BorderFactory.createEtchedBorder());
-        }
-
-        // ** TextArea สำหรับแสดงผล **
         resultTextArea = new JTextArea(6, 40);
         resultTextArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
         resultTextArea.setEditable(false);
         resultTextArea.setBorder(BorderFactory.createTitledBorder("📢 Result"));
         JScrollPane scrollPane = new JScrollPane(resultTextArea);
 
-        // ** เพิ่มทุกอย่างเข้า Frame **
         add(headerLabel, BorderLayout.NORTH);
         add(inputPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
         add(scrollPane, BorderLayout.EAST);
 
-        // ** ActionListener สำหรับปุ่ม **
         submitButton.addActionListener(e -> checkCard());
         registerButton.addActionListener(e -> registerCard());
         deactivateButton.addActionListener(e -> deactivateCard());
         modifyButton.addActionListener(e -> modifyCard());
     }
 
-    private void checkCard() {
-        if (hasCardCheckBox.isSelected()) {
-            String cardIdText = cardIdField.getText().trim();
-            if (cardIdText.isEmpty() || !cardIdText.matches("\\d+")) {
-                resultTextArea.setText("⚠️ Please enter a valid Card ID.");
-                return;
+    private void modifyCard() {
+        String cardIdText = cardIdField.getText().trim();
+        String newOwner = ownerNameField.getText().trim();
+        String cardType = (String) cardTypeComboBox.getSelectedItem();
+
+        if (cardIdText.isEmpty() || newOwner.isEmpty()) {
+            resultTextArea.setText("⚠️ Please enter Card ID and New Owner Name.");
+            return;
+        }
+
+        if (!cardIdText.matches("\\d+")) {
+            resultTextArea.setText("⚠️ Card ID must be a number.");
+            return;
+        }
+
+        int cardId = Integer.parseInt(cardIdText);
+        Card card = admin.findCard(cardId);
+
+        if (card != null) {
+            List<String> newAccessLevels;
+
+            if (cardType.equals("Employee")) {
+                newAccessLevels = Arrays.asList("LowFloor", "MediumFloor", "HighFloor");
+            } else {
+                newAccessLevels = Arrays.asList("LowFloor", "MediumFloor"); // Visitor จำกัดแค่ 2 ชั้น
             }
 
-            int cardId = Integer.parseInt(cardIdText);
-            Card card = admin.findCard(cardId);
-            if (card != null) {
+            admin.modifyCard(card, newOwner, newAccessLevels);
+            resultTextArea.setText("✅ Card modified!\nNew Owner: " + newOwner + "\nNew Access: " + newAccessLevels);
+        } else {
+            resultTextArea.setText("❌ Card not found.");
+        }
+    }
+
+    private void checkCard() {
+        String cardIdText = cardIdField.getText().trim();
+        if (cardIdText.isEmpty()) {
+            resultTextArea.setText("⚠️ Please enter a Card ID.");
+            return;
+        }
+
+        int cardId = Integer.parseInt(cardIdText);
+        Card card = admin.findCard(cardId);
+        if (card != null) {
+            if (!card.isActive()) {  // ตรวจสอบสถานะของบัตร
+                resultTextArea.setText("❌ Card is inactive. Please register again.");
+            } else {
+                LocalTime now = LocalTime.now();
+                LocalTime accessStart = LocalTime.of(8, 0);
+                LocalTime accessEnd = LocalTime.of(18, 0);
+                boolean canAccess = now.isAfter(accessStart) && now.isBefore(accessEnd);
                 resultTextArea.setText(
                         "✔️ Owner: " + card.getOwnerName() + "\n" +
                                 "📇 Card Type: " + card.getCardType() + "\n" +
-                                "🚪 Access Levels: " + card.getAccessLevels()
+                                "🚪 Access Levels: " + card.getAccessLevels() + "\n" +
+                                "⏰ Access Time: " + (canAccess ? "Allowed" : "Denied (Out of hours)")
                 );
-            } else {
-                resultTextArea.setText("❌ Card not found. Please register.");
             }
         } else {
-            resultTextArea.setText("⚠️ Please fill in your information to log in again.");
+            resultTextArea.setText("❌ Card not found. Please register.");
         }
     }
 
@@ -134,26 +158,22 @@ public class Main extends JFrame {
         String ownerName = ownerNameField.getText().trim();
         String ownerAgeText = ownerAgeField.getText().trim();
         String password = passwordField.getText().trim();
+        String cardType = (String) cardTypeComboBox.getSelectedItem();
 
         if (ownerName.isEmpty() || ownerAgeText.isEmpty() || password.isEmpty()) {
             resultTextArea.setText("⚠️ Please fill in all fields.");
             return;
         }
 
-        if (!ownerAgeText.matches("\\d+")) {
-            resultTextArea.setText("⚠️ Owner Age must be a number.");
-            return;
-        }
-
         int ownerAge = Integer.parseInt(ownerAgeText);
-        List<String> accessLevels = Arrays.asList("LowFloor", "MediumFloor", "HighFloor");
-        String cardType = (String) cardTypeComboBox.getSelectedItem();
-        String cardId = String.valueOf(new Random().nextInt(9000) + 1000);
+        List<String> accessLevels = cardType.equals("Employee")
+                ? Arrays.asList("LowFloor", "MediumFloor", "HighFloor")
+                : Arrays.asList("LowFloor", "MediumFloor");
 
-        List<String> cardIdFacades = Collections.singletonList(cardId);
+        String cardId = String.valueOf(new Random().nextInt(9000) + 1000);
         Card card = cardType.equals("Employee")
-                ? new EmployeeCard(ownerName, ownerAge, cardIdFacades, password)
-                : new VisitorCard(ownerName, ownerAge, cardIdFacades, password);
+                ? new EmployeeCard(ownerName, ownerAge, Collections.singletonList(cardId), password)
+                : new VisitorCard(ownerName, ownerAge, Collections.singletonList(cardId), password);
 
         admin.addCard(card, accessLevels);
         resultTextArea.setText("✅ Successfully registered.\n📌 Card ID: " + cardId);
@@ -161,7 +181,7 @@ public class Main extends JFrame {
 
     private void deactivateCard() {
         String cardIdText = cardIdField.getText().trim();
-        if (cardIdText.isEmpty() || !cardIdText.matches("\\d+")) {
+        if (cardIdText.isEmpty()) {
             resultTextArea.setText("⚠️ Please enter a valid Card ID.");
             return;
         }
@@ -169,15 +189,14 @@ public class Main extends JFrame {
         int cardId = Integer.parseInt(cardIdText);
         Card card = admin.findCard(cardId);
         if (card != null) {
-            admin.revokeCard(card);
+            admin.revokeCard(card);  // ลบบัตรออกจากระบบ
             resultTextArea.setText("✅ Card ID " + cardId + " has been canceled.");
+
+            // รีเฟรชผลลัพธ์
+            checkCard();  // ตรวจสอบสถานะบัตรใหม่หลังจากยกเลิก
         } else {
             resultTextArea.setText("❌ Card not found.");
         }
-    }
-
-    private void modifyCard() {
-        // โค้ดการแก้ไขเหมือนเดิม
     }
 
     public static void main(String[] args) {

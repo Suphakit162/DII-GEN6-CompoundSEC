@@ -1,6 +1,6 @@
-package models; // เพิ่ม package models
+package models;
 
-import services.Logger; // เพิ่ม import services.Logger
+import services.Logger;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -40,7 +40,7 @@ public abstract class Card {
     public boolean isActive() { return isActive; }
     public List<String> getAccessLevels() { return accessLevels; }
     public void setAccessLevels(List<String> accessLevels) { this.accessLevels = accessLevels; }
-    public String getPassword() { return password; } // เพิ่ม getter สำหรับ password
+    public String getPassword() { return password; }
 
     public boolean verifyPassword(String password) {
         return this.password.equals(password);
@@ -95,11 +95,11 @@ public abstract class Card {
 
     public abstract void analyzeUsage();
 
-    public int getCardId() { // เพิ่ม method getCardId() สำหรับใช้งานกับ Logger
+    public int getCardId() {
         if (!cardIdFacades.isEmpty()) {
-            return Integer.parseInt(cardIdFacades.get(0)); // หรือตาม logic ที่เหมาะสม
+            return Integer.parseInt(cardIdFacades.get(0));
         }
-        return -1; // หรือค่า default ที่เหมาะสม
+        return -1;
     }
 
     private LocalTime allowedStart;
