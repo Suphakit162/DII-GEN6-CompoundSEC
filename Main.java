@@ -2,6 +2,7 @@ import models.Card;
 import models.EmployeeCard;
 import models.VisitorCard;
 import services.Admin;
+import services.TimeLogDecorator;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
