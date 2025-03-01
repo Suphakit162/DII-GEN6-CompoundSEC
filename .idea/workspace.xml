@@ -5,8 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0a94ba3-893a-4056-b111-b1f3cf91fed2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Diagrams/Diagram2.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Diagrams/Diagrame" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Diagrams/Diagrame3.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Diagrams/DiagrameHandmake.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Diagrams/DiagrameHandmake.drawio.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Diagrams/Final Diagrame.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Diagrams/Project Diagrame.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Diagrams/Untitled Diagram.drawio.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/End Results/End Result.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/End Results/End Result.drawio.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Diagram2.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Diagrame" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Diagrame3.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiagrameHandmake.drawio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/End Result.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/End Result.drawio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Diagrame.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project Diagrame.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled Diagram.drawio.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,13 +48,16 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2sKilTxF7bBObMzGMW25G2LQvtf" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -44,7 +65,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/672110162/Main Folder/DII-GEN6-CompoundSEC",
+    "last_opened_file_path": "D:/Project OOP/DII-GEN6-CompoundSEC",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -72,5 +93,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
