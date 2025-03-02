@@ -9,4 +9,3 @@ public class FloorAccessStrategy implements AccessStrategy {
         return card.getAccessLevels().contains(floorLevel);
     }
 }
-

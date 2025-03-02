@@ -5,23 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0a94ba3-893a-4056-b111-b1f3cf91fed2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/models/AdminCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/CardManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/TimeLogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/AccessControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/models/AccessControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/AccessStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/models/AccessStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/models/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/EmployeeCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/models/EmployeeCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/FloorAccessStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/models/FloorAccessStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/RoomAccessStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/models/RoomAccessStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/VisitorCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/models/VisitorCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/AuditService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/AuditService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/Logger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/TimeLogDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/TimeLogDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/UserLogDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/UserLogDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/CardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/CardManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

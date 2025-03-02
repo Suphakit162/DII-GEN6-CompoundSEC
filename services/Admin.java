@@ -12,29 +12,28 @@ public class Admin {
 
     public Admin(int adminId) {
         this.adminId = adminId;
-        this.cardDatabase = new HashMap<>();
+        cardDatabase = new HashMap<>();
     }
 
+    // เพิ่มบัตรลงในฐานข้อมูล
     public void addCard(Card card, List<String> accessLevels) {
         card.setAccessLevels(accessLevels);
-        // ใช้ cardId ที่แรกใน cardIds
-        int cardId = Integer.parseInt(card.getCardIdList().get(0));
-        cardDatabase.put(cardId, card);
+        cardDatabase.put(Integer.parseInt(card.getCardId().get(0)), card);  // ใช้ Card ID เป็นคีย์
     }
 
+    // ค้นหาบัตรจาก Card ID
     public Card findCard(int cardId) {
         return cardDatabase.get(cardId);
     }
 
-    public void modifyCard(Card card, String newOwner, List<String> newAccessLevels) {
-        card.modifyCard(newOwner, newAccessLevels);
-    }
-
+    // ยกเลิกการใช้งานบัตร (Deactivate)
     public void revokeCard(Card card) {
-        card.deactivate();  // เรียกเมธอด deactivate()
+        card.setActive(false);
     }
 
-    public int getAdminId() {
-        return adminId;
+    // แก้ไขบัตร
+    public void modifyCard(Card card, String newOwnerName, int newOwnerAge, List<String> newAccessLevels) {
+        card.setOwnerName(newOwnerName);
+        card.setAccessLevels(newAccessLevels);
     }
 }

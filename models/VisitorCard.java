@@ -15,7 +15,7 @@ public class VisitorCard extends Card {
 
     @Override
     public void analyzeUsage() {
-        // Visitor-specific logic for analyzing usage
+
         System.out.println("Analyzing usage for Visitor card...");
     }
 }

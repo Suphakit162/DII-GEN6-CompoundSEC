@@ -15,7 +15,7 @@ public class AdminCard extends Card {
 
     @Override
     public void analyzeUsage() {
-        // Employee-specific logic for analyzing usage
+
         System.out.println("Analyzing usage for Admin card...");
     }
 }
