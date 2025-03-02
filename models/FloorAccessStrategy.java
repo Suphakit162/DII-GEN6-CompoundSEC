@@ -1,6 +1,5 @@
 package models;
 
-
 public class FloorAccessStrategy implements AccessStrategy {
     @Override
     public boolean checkAccess(Card card, String floorLevel, String roomNumber) {
@@ -10,3 +9,4 @@ public class FloorAccessStrategy implements AccessStrategy {
         return card.getAccessLevels().contains(floorLevel);
     }
 }
+

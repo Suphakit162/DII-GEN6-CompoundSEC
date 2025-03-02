@@ -2,20 +2,20 @@ package models;
 
 import java.util.List;
 
-public class EmployeeCard extends Card {
+public class AdminCard extends Card {
 
-    public EmployeeCard(String ownerName, int ownerAge, List<String> cardId, String password) {
+    public AdminCard(String ownerName, int ownerAge, List<String> cardId, String password) {
         super(ownerName, ownerAge, cardId, password);
     }
 
     @Override
     public String getCardType() {
-        return "Employee";
+        return "Admin";
     }
 
     @Override
     public void analyzeUsage() {
         // Employee-specific logic for analyzing usage
-        System.out.println("Analyzing usage for Employee card...");
+        System.out.println("Analyzing usage for Admin card...");
     }
 }

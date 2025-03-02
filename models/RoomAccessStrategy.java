@@ -1,6 +1,5 @@
 package models;
 
-
 public class RoomAccessStrategy implements AccessStrategy {
     @Override
     public boolean checkAccess(Card card, String floorLevel, String roomNumber) {

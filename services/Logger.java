@@ -18,7 +18,3 @@ public class Logger {
         System.out.println("[LOG] " + LocalDateTime.now() + " - " + message);
     }
 }
-
-
-
-

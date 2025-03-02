@@ -1,48 +1,40 @@
 package services;
 
 import models.Card;
-import java.util.ArrayList;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Admin {
-    private final int accessLevel;
-    private final List<Card> cards;
+    private int adminId;
+    private Map<Integer, Card> cardDatabase;
 
-    public Admin(int accessLevel) {
-        this.accessLevel = accessLevel;
-        this.cards = new ArrayList<>();
+    public Admin(int adminId) {
+        this.adminId = adminId;
+        this.cardDatabase = new HashMap<>();
     }
 
     public void addCard(Card card, List<String> accessLevels) {
         card.setAccessLevels(accessLevels);
-        cards.add(card);
-        Logger.log("Card Added - ID: " + card.getCardIdFacades().get(0) + " | Owner: " + card.getOwnerName());
-    }
-
-    public void revokeCard(Card card) {
-        if (card.isActive()) {
-            card.deactivateCard(); // หรือปิดการใช้งานบัตร
-            cards.remove(card);     // ลบบัตรออกจากรายการ cards
-            Logger.log("Card Revoked - ID: " + card.getCardIdFacades().get(0));
-        } else {
-            Logger.log("Card is already inactive - ID: " + card.getCardIdFacades().get(0));
-        }
-    }
-
-    public void modifyCard(Card card, String newOwner, List<String> newAccessLevels) {
-        card.setOwnerName(newOwner);
-        card.setAccessLevels(newAccessLevels);
-        Logger.log("Card Modified - ID: " + card.getCardIdFacades().get(0) + " | New Owner: " + newOwner);
+        // ใช้ cardId ที่แรกใน cardIds
+        int cardId = Integer.parseInt(card.getCardIdList().get(0));
+        cardDatabase.put(cardId, card);
     }
 
     public Card findCard(int cardId) {
-        for (Card card : cards) {
-            if (card.getCardId() == cardId) {
-                return card;
-            }
-        }
-        return null;
+        return cardDatabase.get(cardId);
+    }
+
+    public void modifyCard(Card card, String newOwner, List<String> newAccessLevels) {
+        card.modifyCard(newOwner, newAccessLevels);
+    }
+
+    public void revokeCard(Card card) {
+        card.deactivate();  // เรียกเมธอด deactivate()
+    }
+
+    public int getAdminId() {
+        return adminId;
     }
 }
-
-

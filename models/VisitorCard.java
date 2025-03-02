@@ -3,12 +3,19 @@ package models;
 import java.util.List;
 
 public class VisitorCard extends Card {
-    public VisitorCard(String ownerName, int ownerAge, List<String> cardIdFacades, String password) {
-        super(ownerName, ownerAge, cardIdFacades, "Visitor", password);
+
+    public VisitorCard(String ownerName, int ownerAge, List<String> cardId, String password) {
+        super(ownerName, ownerAge, cardId, password);
+    }
+
+    @Override
+    public String getCardType() {
+        return "Visitor";
     }
 
     @Override
     public void analyzeUsage() {
-        System.out.println("Visitor Card Usage Analysis: " + getCardIdFacades().get(0));
+        // Visitor-specific logic for analyzing usage
+        System.out.println("Analyzing usage for Visitor card...");
     }
 }
