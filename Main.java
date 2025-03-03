@@ -92,7 +92,8 @@ public class Main extends JFrame {
         deactivateButton.addActionListener(e -> deactivateCard());
         modifyButton.addActionListener(e -> modifyCard());
     }
-    //เช็คการ์ด
+
+    // เช็คการ์ด
     private void checkCard() {
         String cardIdText = cardIdField.getText().trim();
         String ownerNameText = ownerNameField.getText().trim();
@@ -138,6 +139,7 @@ public class Main extends JFrame {
             resultTextArea.setText("❌ Card not found or information does not match.");
         }
     }
+
     // โมดิฟายการ์ด(แก้ไข)
     private void modifyCard() {
         String cardIdText = cardIdField.getText().trim();
@@ -179,7 +181,8 @@ public class Main extends JFrame {
             resultTextArea.setText("❌ Card not found or information does not match.");
         }
     }
-    //เพิ่มการ์ด
+
+    // เพิ่มการ์ด
     private void registerCard() {
         String ownerName = ownerNameField.getText().trim();
         String ownerAgeText = ownerAgeField.getText().trim();
